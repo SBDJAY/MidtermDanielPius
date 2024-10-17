@@ -47,6 +47,10 @@ struct ContentView: View {
     //Create Stored Properties
     @StateObject var orderList = Orderlist()
     
+    //User Order Name
+    @State private var tfName : String = ""
+
+    
     //Size Options
     let coffeeSizes = ["Small", "Medium", "Large"]
     @State private var selectedSize = "Small"
@@ -62,14 +66,51 @@ struct ContentView: View {
     @State private var totalCups : Int = 0
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView{
+            VStack (alignment: .leading, spacing: 20){
+                Text("Order a Coffee")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar{
+                    ToolbarItem(placement: .principal){
+                        VStack{
+                            Text("Daniel Pius").font(.headline)
+                        }
+                    }
+                }
+                .foregroundColor(Color.black)
+                .font(.title)
+                .bold()
+                
+                Form{
+                    Section(header: Text("Your Name")){
+                        //House Price Input
+                        TextField("Name: ", text: self.$tfName)
+                    }
+                    //Choose Coffee Size UI
+                    Section(header: Text("Select Coffee Size")){
+                        Picker("Size: ", selection: $selectedSize){
+                            ForEach(coffeeSizes, id: \.self){
+                                Text($0)
+                            }
+                        }
+                    }.pickerStyle(.segmented)
+                    
+                    Section(header: Text("Select Coffee Type")){
+                        Picker("Size: ", selection: $selectedType){
+                            ForEach(coffeeTypes, id: \.self){
+                                Text($0)
+                            }
+                        }
+                    }.pickerStyle(.segmented)
+
+                    
+                    
+                }
+            }
+            
         }
-        .padding()
-    }
+        
+            }
 }
 
 #Preview {
