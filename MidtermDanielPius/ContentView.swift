@@ -49,6 +49,8 @@ struct ContentView: View {
     
     //User Order Name
     @State private var tfName : String = ""
+    
+    @State var isOn = false
 
     
     //Size Options
@@ -64,6 +66,15 @@ struct ContentView: View {
     
     //total Cups Options
     @State private var totalCups : Int = 0
+    
+    //Number Formatter object
+    private let numberFormatter : NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.generatesDecimalNumbers = false
+        formatter.zeroSymbol = ""
+        return formatter
+    }()
     
     var body: some View {
         NavigationView{
@@ -102,8 +113,17 @@ struct ContentView: View {
                             }
                         }
                     }.pickerStyle(.segmented)
-
                     
+                    Section(header: Text("Complte Order")){
+                        Toggle(isOn: $isOn){
+                            Text("Add Tip")
+                        }
+                    }
+                    
+                    Section(header: Text("Number of Cups")){
+                        //House Price Input
+                        TextField("Enter Number of Cups: ", value: self.$totalCups, formatter: numberFormatter)
+                    }
                     
                 }
             }
