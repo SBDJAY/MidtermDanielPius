@@ -50,8 +50,8 @@ struct ContentView: View {
     //User Order Name
     @State private var tfName : String = ""
     
+    //toggle on/ off
     @State var isOn = false
-
     
     //Size Options
     let coffeeSizes = ["Small", "Medium", "Large"]
@@ -114,7 +114,7 @@ struct ContentView: View {
                         }
                     }.pickerStyle(.segmented)
                     
-                    Section(header: Text("Complte Order")){
+                    Section(header: Text("Would you like to add a $2 tip?")){
                         Toggle(isOn: $isOn){
                             Text("Add Tip")
                         }
@@ -125,6 +125,23 @@ struct ContentView: View {
                         TextField("Enter Number of Cups: ", value: self.$totalCups, formatter: numberFormatter)
                     }
                     
+                    //Complete Order UI Button
+                    Section(header: Text("Complte Order")){
+                        Button(action: {
+                            //Add Function call to add order
+                            orderList.addCoffeeOrder(
+                                size: selectedSize,
+                                type: selectedType,
+                                tip: true,
+                                numOfCups: totalCups)
+                        }) {
+                            Text("Add Order")
+                        }
+                    }
+                    
+                    NavigationLink(destination: SummaryView(orderList: orderList, coffeeOrder: orderList.coffeeOrder)){
+                        Text("Show Orders")
+                    }
                 }
             }
             

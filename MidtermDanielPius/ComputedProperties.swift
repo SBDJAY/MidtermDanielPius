@@ -6,3 +6,17 @@
 //
 
 import Foundation
+
+//var orderClass = Order()
+
+//func basePrice() -> Double{
+//    
+//retru}
+//
+//func Tip() -> Double{
+//    
+//}
+//
+//func totalPrice() -> Double{
+//    
+//}
